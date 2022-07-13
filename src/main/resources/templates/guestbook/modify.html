@@ -43,6 +43,9 @@
             <button type="button" id="btnList" class="btn btn-danger">List</button>
             <button type="button" id="btnRemove" class="btn btn-info">Remove</button>
         </div>
+
+
+
         <script th:inlint="javascript">
             var actionForm = document.querySelector("form");
             document.querySelector('#btnModify');
@@ -62,6 +65,7 @@
                 actionForm.setAttribute("method", "post");
                 actionForm.submit();
             }
+
         </script>
     </th:block>
 </th:block>
