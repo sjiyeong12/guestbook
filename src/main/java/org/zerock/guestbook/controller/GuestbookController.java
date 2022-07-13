@@ -43,7 +43,7 @@ public class GuestbookController {
         // RedirectAttributes는 다음 페이지로 값을 넘겨줄 수 있다. model처럼..!
         log.info("register post...");
         Long gno = gbService.register(dto);
-        ra.addFlashAttribute("msg", gno);
+        ra.addFlashAttribute("msg", gno + " 등록");
         // 플래시처럼 데이터를 한번만 전송해준다. 한번만 넘겨주고 다음에 넘겨줄 때는 못 받게 만들어 줌(일회성) ("메세지", 글번호)
         return "redirect:/guestbook/list";
         // redirect:를 붙인 이유 -> 32행의 값을 넘겨줘야함. 하지만 코드가 중복되는 것을 방지해야함.
@@ -61,10 +61,12 @@ public class GuestbookController {
     }
 
     @PostMapping("/remove")
-    public String remove(long gno, RedirectAttributes ra) {
+    public String remove(long gno, RedirectAttributes ra,
+            PageRequestDTO requestDTO) {
         log.info("remove....." + gno);
-        gbService.read(gno);
-        ra.addFlashAttribute("msg", gno);
+        gbService.remove(gno);
+        ra.addFlashAttribute("msg", gno + " 삭제");
+        ra.addAttribute("page", requestDTO.getPage());
         return "redirect:/guestbook/list";
     }
 
@@ -73,7 +75,7 @@ public class GuestbookController {
             PageRequestDTO requestDTO) {
         log.info("modify...." + dto);
         gbService.modify(dto);
-        ra.addFlashAttribute("msg", dto.getGno() + "");
+        ra.addFlashAttribute("msg", dto.getGno() + " 수정");
         ra.addAttribute("gno", dto.getGno());
         ra.addAttribute("page", requestDTO.getPage());
         return "redirect:/guestbook/read";

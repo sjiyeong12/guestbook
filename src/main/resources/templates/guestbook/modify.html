@@ -53,12 +53,12 @@
             }
             const btnList = document.querySelector('#btnList');
             btnList.onclick = function(){
-
+                location.href= /*[[@{/guestbook/list(page=${requestDTO.page})}]]*/'url'
             }
 
             const btnRemove = document.querySelector('#btnRemove');
             btnRemove.onclick = function(){
-                actionForm.setAttribute("action", /*@{/guestbook/modify}*/'modify');
+                actionForm.setAttribute("action", /*@{/guestbook/remove}*/'remove');
                 actionForm.setAttribute("method", "post");
                 actionForm.submit();
             }
